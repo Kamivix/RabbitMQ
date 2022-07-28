@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    stream:
+      sqs:
+        bindings:
+          userExchange-in-0:
+            consumer:
+              snsFanout: false
+          emailExchange-in-0:
+            consumer:
+              snsFanout: false
+          articleExchange-in-0:
+            consumer:
+              snsFanout: false
+          commentExchange-in-0:
+            consumer:
+              snsFanout: false
+      bindings:
+        userExchange-out-0:
+          destination: userTopic
+        userExchange-in-0:
+          destination: userTopic
+        emailExchange-out-0:
+          destination: emailTopic
+        emailExchange-in-0:
+          destination: emailTopic
+        articleExchange-out-0:
+          destination: articleTopic
+        articleExchange-in-0:
+          destination: articleTopic
+        commentExchange-out-0:
+          destination: commentTopic
+        commentExchange-in-0:
+          destination: commentTopic
+    function:
+     definition: userExchange;emailExchange;articleExchange;commentExchange;
+cloud:
+  aws:
+    region:
+      static: "eu-central-1"
+    stack:
+      auto: false
+    credentials:
+      access-key: "foo"
+      secret-key: "bra"
+    sqs:
+      endpoint: "http://127.0.0.1:4566"

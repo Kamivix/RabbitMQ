@@ -1,18 +1,13 @@
 package com.example.rabbitmq.config;
 
-import com.rabbitmq.client.AMQP;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
-
+import org.springframework.messaging.Message;;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+
 
 @Configuration
 
@@ -21,7 +16,7 @@ public class Functions {
 Logger logger = LoggerFactory.getLogger(Functions.class);
 
     @Bean
-    Consumer<String> userExchange(){
+    Consumer<Message<String>> userExchange(){
         return message-> {
             logger.info("Received message from user :" + message);
 
@@ -43,7 +38,7 @@ Consumer<Message<String>> commentExchange(){
 }
 
 @Bean
-Consumer<Message<String>> receiver(){
+Consumer<Message<String>> emailExchange(){
     return message->{
         logger.info("Received message from email :" + message);
 
@@ -57,6 +52,8 @@ Consumer<Message<String>> receiver(){
 
         };
     }
+
+
 
 
 
