@@ -20,7 +20,9 @@ StreamBridge streamBridge;
     @PostMapping("/user")
     public ResponseEntity<String> createUser(@RequestParam("messageData") String messageData){
       Message<String> message = MessageBuilder.withPayload(messageData).setHeader("routing_key","user").build();
+        Message<String> message2 = MessageBuilder.withPayload("informacja").setHeader("routing_key","user").build();
 streamBridge.send("userExchange-out-0",message);
+streamBridge.send("userExchange-out-0",message2);
         return ResponseEntity.ok().body("USER_CREATED");
     }
 
